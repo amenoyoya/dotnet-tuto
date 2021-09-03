@@ -53,7 +53,10 @@
     - Bash (Ubuntu 20.04)
 - Editor:
     - VSCode
-- .NET Core SDK: `3.1`
+- .NET Core SDK: `2.1`
+    - 外部DLL（.Net Framework 等で作成されたDLL）を直接参照可能なのは .NET Core 2.x のみ
+        - ※ ただし、Windows プラットフォームのみサポート（Mac／Linux は非対応）
+    - 2021年9月時点で .NET Core は `3.1` がLTS版で `6.0` が最新版だが、外部DLLを直接参照するために `2.1` を利用する
 
 ### Setup
 
@@ -64,14 +67,14 @@
 # install Chocolatey package manager
 > Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-# install .NET Core SDK 3.1
-> choco install -y dotnetcore-sdk
+# install .NET Core SDK 2.1
+> choco install -y dotnetcore-sdk --version=2.1.802
 
 # -- close and re-open powershell
 
 # confirm dotnet version
 > dotnet --version
-3.1.410
+2.1.802
 ```
 
 #### Ubuntu 20.04
@@ -80,15 +83,15 @@
 $ wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 $ sudo dpkg -i packages-microsoft-prod.deb
 
-# install .NET Core SDK 3.1
+# install .NET Core SDK 2.1
 $ sudo apt update && \
   sudo apt install -y apt-transport-https && \
   sudo apt update && \
-  sudo apt install -y dotnet-sdk-3.1
+  sudo apt install -y dotnet-sdk-2.1
 
 # confirm dotnet version
 $ dotnet --version
-3.1.410
+2.1.816
 ```
 
 ***
