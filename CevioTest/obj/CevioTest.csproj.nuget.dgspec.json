@@ -1,0 +1,53 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\github\\dotnet-tuto\\CevioTest\\CevioTest.csproj": {}
+  },
+  "projects": {
+    "D:\\github\\dotnet-tuto\\CevioTest\\CevioTest.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\github\\dotnet-tuto\\CevioTest\\CevioTest.csproj",
+        "projectName": "CevioTest",
+        "projectPath": "D:\\github\\dotnet-tuto\\CevioTest\\CevioTest.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "D:\\github\\dotnet-tuto\\CevioTest\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net4.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net40": {
+            "targetAlias": "net4.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net40": {
+          "targetAlias": "net4.0",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

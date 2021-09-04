@@ -56,6 +56,7 @@
 - .NET Core SDK: `2.1`
     - 外部DLL（.Net Framework 等で作成されたDLL）を直接参照可能なのは .NET Core 2.x のみ
         - ※ ただし、Windows プラットフォームのみサポート（Mac／Linux は非対応）
+        - ※ .NET Core 3.x 以降は NuGet 経由でのDLL参照のみをサポート
     - 2021年9月時点で .NET Core は `3.1` がLTS版で `6.0` が最新版だが、外部DLLを直接参照するために `2.1` を利用する
 
 ### Setup
@@ -159,4 +160,100 @@ namespace HelloWorld
 > dotnet run
 
 Hello World!
+```
+
+***
+
+## CeVIO AI Speak Test
+
+.NET Core SDK で CeVIO AI の小春六花ちゃんを喋らせてみる
+
+※ 前提として CeVIO AI 本体と小春六花ちゃんのトークボイスがインストールされている環境であること
+
+### プロジェクトの作成
+```powershell
+# プロジェクト作成
+## - Type: Console
+## - Name: CevioTest
+## - Directory: CevioTest
+## - Target Framework: .Net 4.0
+##   - CeVIO AI 連携APIのDLLが .Net Framework 4.8 で作られているため、Target Framework に 4.0 を指定する
+> dotnet new console -n CevioTest -o CevioTest --target-framework-override net4.0
+
+# プロジェクトディレクトリに移動
+> cd CevioTest
+```
+
+### 外部DLLの準備
+CeVIO AI のAPIを使うためには `CeVIO.Talk.RemoteService2.dll` をプロジェクトに追加する必要がある
+
+```powershell
+# CeVIO.Talk.RemoteService2.dll (CeVIO AI 連携API) を CeVIO AI 本体ディレクトリからコピー
+> cp cp "C:\Program Files\CeVIO\CeVIO AI\CeVIO.Talk.RemoteService2.dll" .\
+
+# プロジェクト設定ファイルを VSCode で開く
+> code CevioTest.csproj
+```
+
+`CevioTest.csproj` ファイルに依存DLL `CeVIO.Talk.RemoteService2.dll` の設定を書き加える
+
+```diff:CevioTest.csproj
+  <Project Sdk="Microsoft.NET.Sdk">
+  
+    <PropertyGroup>
+      <OutputType>Exe</OutputType>
+      <TargetFramework>net4.0</TargetFramework>
+    </PropertyGroup>
+
++   <ItemGroup>
++     <Reference Include="Cevio.Talk.RemoteService2.dll">
++       <HintPath>Cevio.Talk.RemoteService2.dll</HintPath>
++     </Reference>
++   </ItemGroup>
+
+  </Project>
+```
+
+### CeVIO AI に喋らせるコードの記述
+公式サイトの [.NET連携API仕様](https://cevio.jp/guide/cevio_ai/interface/dotnet/) を参考に `Program.cs` を記述する
+
+```csharp:Program.cs
+using System;
+using CeVIO.Talk.RemoteService2;
+
+namespace CevioTest
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // 【CeVIO AI】起動
+            ServiceControl2.StartHost(false);
+
+            // Talkerインスタンス生成
+            Talker2 talker = new Talker2();
+
+            // キャスト設定
+            talker.Cast = "小春六花";
+
+            // （例）音量設定
+            talker.Volume = 100;
+
+            // （例）再生
+            SpeakingState2 state = talker.Speak("こんにちは");
+            state.Wait();
+
+            // 【CeVIO AI】終了
+            ServiceControl2.CloseHost();
+        }
+    }
+}
+```
+
+### プログラムのコンパイル・実行
+```powershell
+# プログラムのコンパイル・実行
+> dotnet run
+
+## => CeVIO AI が起動し、立花ちゃんが「こんにちは」と喋ればOK
 ```
