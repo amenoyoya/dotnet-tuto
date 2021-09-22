@@ -257,3 +257,29 @@ namespace CevioTest
 
 ## => CeVIO AI が起動し、立花ちゃんが「こんにちは」と喋ればOK
 ```
+
+***
+
+## F#
+
+### WindowsForm by F#
+- New file like below: `WindowsFormTest.fsx`
+    - インタープリタとして実行したい場合は拡張子を `.fsx` にする
+
+```fsharp:WindowsFormTest.fsx
+#I @"C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.17"
+#r "System"
+#r "System.Windows.Forms"
+
+open System
+open System.Windows.Forms
+
+[<EntryPoint; STAThread>] do
+System.Windows.Forms.Application.Run(new Form())
+```
+
+- Execution: `dotnet fsi` コマンドで F# インタープリタ実行
+
+```powershell
+> dotnet fsi ./WindowsFormTest.fsx
+```
