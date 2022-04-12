@@ -283,3 +283,32 @@ System.Windows.Forms.Application.Run(new Form())
 ```powershell
 > dotnet fsi ./WindowsFormTest.fsx
 ```
+
+***
+
+## .NET Interactive with Jupyter
+
+.NET Interactive (.NET Core SDK 3 まで対応) を使うと、Jupyter 環境で C# をインタラクティブに使うことができる
+
+### Setup
+```powershell
+# .NET Interactive インストール
+> dotnet tool install -g Microsoft.dotnet-interactive
+
+# .NET Interactive Jupyter kernel インストール
+> dotnet interactive jupyter install
+```
+
+### VSCode で Jupyter を使う場合
+以下の Extension をインストールする
+
+- [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
+- [.NET Interactive Notebooks](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)
+
+もし上手く動かない場合は、一度ブラウザで Jupyter 環境を起動して実行してみると良い
+
+```powershell
+> jupyter lab
+```
+
+[jupyter_dotnet.ipynb](./jupyter_dotnet.ipynb)
